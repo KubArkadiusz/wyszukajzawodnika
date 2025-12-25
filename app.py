@@ -39,8 +39,9 @@ SHEET_ID = "10vOqcwAtnBtznQ1nEUX2L27W3Xz2ZC1A"
 SHEET_URL = f"https://docs.google.com/spreadsheets/d/10vOqcwAtnBtznQ1nEUX2L27W3Xz2ZC1A/export?format=csv"
 
 # Logo parkrun Polska i nagłówek
-st.subheader("Wyszukiwarka Zawodników by Arkadiusz KUBAŚparkrun Skórzec")
 st.title("parkrun Skórzec - zapraszamy w każdą sobotę")
+st.subheader("Wyszukiwarka Zawodników by Arkadiusz KUBAŚparkrun Skórzec")
+
 
 @st.cache_data(ttl=30)
 def load_data():
