@@ -39,9 +39,8 @@ SHEET_ID = "10vOqcwAtnBtznQ1nEUX2L27W3Xz2ZC1A"
 SHEET_URL = f"https://docs.google.com/spreadsheets/d/10vOqcwAtnBtznQ1nEUX2L27W3Xz2ZC1A/export?format=csv"
 
 # Logo parkrun Polska i nagłówek
-st.image("https://images.parkrun.com/website/generic/logo_white_background.png", width=220)
-st.title("🌳 parkrun Skórzec")
-st.subheader("Wyszukiwarka numerów startowych")
+st.title("parkrun Skórzec")
+st.subheader("Wyszukiwarka Zawodników by Arkadiusz KUBAŚ")
 
 @st.cache_data(ttl=30)
 def load_data():
