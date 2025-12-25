@@ -36,7 +36,7 @@ st.markdown("""
 
 # --- KONFIGURACJA BAZY ---
 SHEET_ID = "10vOqcwAtnBtznQ1nEUX2L27W3Xz2ZC1A"
-SHEET_URL = f"https://docs.google.com/spreadsheets/d/{SHEET_ID}/export?format=csv"
+SHEET_URL = f"https://docs.google.com/spreadsheets/d/10vOqcwAtnBtznQ1nEUX2L27W3Xz2ZC1A/export?format=csv"
 
 # Logo parkrun Polska i nagłówek
 st.image("https://images.parkrun.com/website/generic/logo_white_background.png", width=220)
@@ -58,7 +58,7 @@ df = load_data()
 if not df.empty:
     with st.container():
         st.write("---")
-        search_query = st.number_input("Wpisz swój numer startowy:", min_value=1, max_value=99999, step=1, value=None, placeholder="Wpisz numer...")
+        search_query = st.number_input("Wpisz numer startowy:", min_value=1, max_value=99999, step=1, value=None, placeholder="Wpisz numer...")
         st.write("---")
 
     if search_query:
