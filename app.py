@@ -76,7 +76,7 @@ if not df.empty:
         if not result.empty:
             for index, row in result.iterrows():
                 # KLUCZOWA ZMIANA: Kod HTML w jednej linii (usuwa ciemne tło kodu)
-                html_output = f'<div class="athlete-card"><div class="card-label">Zawodnik:</div><div class="big-blue-value">{row["Imię"]} {row["Nazwisko"]}</div><div class="card-label">Numer ID:</div><div class="id-value">#{row["Numer Startowy"]}</div><div class="card-label">Klub:</div><div class="big-blue-value">{row["Klub"]}</div><div class="card-label">Miejscowość:</div><div class="big-blue-value">{row["Miejscowość"]}</div></div>'
+                html_output = f'<div class="athlete-card"><div class="card-label">Zawodnik:</div><div class="big-blue-value">{row["Imię"]} {row["Nazwisko"]}</div><div class="card-label">Klub:</div><div class="big-blue-value">{row["Klub"]}</div><div class="card-label">Miejscowość:</div><div class="big-blue-value">{row["Miejscowość"]}</div></div>'
                 st.write(html_output, unsafe_allow_html=True)
         else:
             st.error("❌ Brak tego numeru w bazie.")
