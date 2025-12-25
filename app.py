@@ -7,10 +7,10 @@ st.title("🏃 System Wyszukiwania Zawodników")
 st.write("Wgraj plik Excel, aby umożliwić wyszukiwanie po numerze startowym.")
 
 # 1. Przesyłanie pliku
-uploaded_file = st.file_uploader("Wybierz plik Excel", type=["xlsx"])
+uploaded_file = st.file_uploader("Wybierz plik Excel", type=["xlsx", "xls"])
 
 if uploaded_file:
-    # Wczytanie danych
+    # Pandas sam dobierze odpowiedni silnik (openpyxl dla xlsx, xlrd dla xls)
     df = pd.read_excel(uploaded_file)
     
     # Czyszczenie nazw kolumn (usuwamy spacje)
