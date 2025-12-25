@@ -47,8 +47,11 @@ st.markdown("""
 SHEET_ID = "10vOqcwAtnBtznQ1nEUX2L27W3Xz2ZC1A"
 SHEET_URL = f"https://docs.google.com/spreadsheets/d/{SHEET_ID}/export?format=csv"
 
-# 4. Nagłówki
-st.image("https://images.parkrun.com/website/generic/logo_white_background.png", width=200)
+# 4. Logo i Nagłówek (wczytywanie z Twojego repozytorium)
+try:
+    st.image("logo.jpg", width=200)
+except:
+    st.write("🌳 **parkrun Skórzec**") # Tekst zastępczy, jeśli plik logo jeszcze się nie wgrał
 st.title("Wyszukiwarka Zawodników by Arkadiusz KUBAŚ")
 st.subheader("parkrun Skórzec - zapraszamy w każdą sobotę")
 
