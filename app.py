@@ -1,47 +1,59 @@
 import streamlit as st
 import pandas as pd
 
-# Ustawienia strony
-st.set_page_config(page_title="Wyszukiwarka Zawodników by Arkadiusz KUBAŚ - parkrun Skórzec", page_icon="🌳", layout="centered")
+# 1. Ustawienia strony
+st.set_page_config(
+    page_title="Wyszukiwarka Zawodników by Arkadiusz KUBAŚ - parkrun Skórzec", 
+    page_icon="🌳", 
+    layout="centered"
+)
 
-# Niestandardowy styl CSS
+# 2. Stylizacja Niebieska - Ujednolicony styl dla Imienia, Klubu i Miejscowości
 st.markdown("""
     <style>
     .main {
-        background-color: #f5f7f9;
+        background-color: #f0f2f6;
     }
     .athlete-card {
         background-color: white;
         padding: 25px;
         border-radius: 15px;
         box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-        border-left: 10px solid #00af41;
+        border-left: 10px solid #007bff; /* Kolor Niebieski */
         margin-bottom: 20px;
+        font-family: sans-serif;
     }
     .card-label {
         color: #666;
-        font-size: 14px;
-        margin-bottom: 2px;
+        font-size: 13px;
         text-transform: uppercase;
+        margin-bottom: 2px;
     }
-    .card-value {
-        font-size: 20px;
+    /* Ujednolicony duży styl dla kluczowych danych */
+    .big-blue-value {
+        color: #007bff;
+        font-size: 26px;
         font-weight: bold;
-        color: #333;
-        margin-bottom: 10px;
+        margin-bottom: 15px;
+        line-height: 1.2;
     }
-    h2 { color: #00af41 !important; margin-top: 0; }
+    .id-value {
+        font-size: 20px;
+        color: #333;
+        font-weight: bold;
+        margin-bottom: 15px;
+    }
     </style>
     """, unsafe_allow_html=True)
 
-# --- KONFIGURACJA BAZY ---
+# 3. Konfiguracja Bazy Danych
 SHEET_ID = "10vOqcwAtnBtznQ1nEUX2L27W3Xz2ZC1A"
-SHEET_URL = f"https://docs.google.com/spreadsheets/d/10vOqcwAtnBtznQ1nEUX2L27W3Xz2ZC1A/export?format=csv"
+SHEET_URL = f"https://docs.google.com/spreadsheets/d/{SHEET_ID}/export?format=csv"
 
-# Logo parkrun Polska i nagłówek
+# 4. Nagłówki
+st.image("https://images.parkrun.com/website/generic/logo_white_background.png", width=200)
 st.title("Wyszukiwarka Zawodników by Arkadiusz KUBAŚ")
 st.subheader("parkrun Skórzec - zapraszamy w każdą sobotę")
-
 
 @st.cache_data(ttl=30)
 def load_data():
@@ -50,16 +62,22 @@ def load_data():
         data.columns = data.columns.str.strip()
         return data
     except Exception as e:
-        st.error(f"Błąd bazy danych: {e}")
         return pd.DataFrame()
 
 df = load_data()
 
+# 5. Interfejs wyszukiwania
 if not df.empty:
-    with st.container():
-        st.write("---")
-        search_query = st.number_input("Wpisz numer startowy:", min_value=1, max_value=99999, step=1, value=None, placeholder="Wpisz numer...")
-        st.write("---")
+    st.write("---")
+    search_query = st.number_input(
+        "Wpisz numer startowy:", 
+        min_value=1, 
+        max_value=99999, 
+        step=1, 
+        value=None, 
+        placeholder="Wpisz numer..."
+    )
+    st.write("---")
 
     if search_query:
         df['Numer Startowy'] = df['Numer Startowy'].astype(str)
@@ -67,20 +85,20 @@ if not df.empty:
         
         if not result.empty:
             for index, row in result.iterrows():
-                # Wyświetlanie wszystkich danych w jednej estetycznej ramce
+                # Wszystkie trzy pola (Nazwisko, Klub, Miejscowość) używają klasy .big-blue-value
                 st.markdown(f"""
                 <div class="athlete-card">
                     <div class="card-label">Zawodnik:</div>
-                    <h2>{row['Imię']} {row['Nazwisko']}</h2>
+                    <div class="big-blue-value">{row['Imię']} {row['Nazwisko']}</div>
                     
                     <div class="card-label">Numer ID:</div>
-                    <div class="card-value">#{row['Numer Startowy']}</div>
+                    <div class="id-value">#{row['Numer Startowy']}</div>
                     
                     <div class="card-label">Klub:</div>
-                    <div class="card-value">{row['Klub']}</div>
+                    <div class="big-blue-value">{row['Klub']}</div>
                     
                     <div class="card-label">Miejscowość:</div>
-                    <div class="card-value">{row['Miejscowość']}</div>
+                    <div class="big-blue-value">{row['Miejscowość']}</div>
                 </div>
                 """, unsafe_allow_html=True)
         else:
